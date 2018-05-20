@@ -38,6 +38,15 @@ app.get('/about', (req, res) => {
   res.render('about', { title });
 });
 
+// Ideas Index page
+app.get('/ideas', (req, res) => {
+  Idea.find({})
+    .sort({ date: 'desc' })
+    .then(ideas => {
+      res.render('ideas/index', { ideas });
+    });
+});
+
 // Add Idea Route
 app.get('/ideas/add', (req, res) => {
   res.render('ideas/add');
