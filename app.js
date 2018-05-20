@@ -110,10 +110,8 @@ app.put('/ideas/:id', (req, res) => {
   });
 });
 
-app.delete('/ideas/delete/:id', (req, res) => {
-  Idea.findOneAndRemove({
-    _id: req.params.id
-  }).then(() => {
+app.delete('/ideas/:id', (req, res) => {
+  Idea.remove({ _id: req.params.id }).then(() => {
     res.redirect('/ideas');
   });
 });
