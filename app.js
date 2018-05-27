@@ -16,10 +16,12 @@ const users = require('./routes/users');
 
 // Passport Config
 require('./config/passport')(passport);
+// DB Config
+const db = require('./config/database');
 
 // Connect to Mongoose
 mongoose
-  .connect('mongodb://localhost/vidjot-dev', {
+  .connect(db.mongoURL, {
     //useMongoClient: true
   })
   .then(() => console.log('MongoDB connected...'))
@@ -83,7 +85,7 @@ app.use('/ideas', ideas);
 // Use Users routes
 app.use('/users', users);
 
-const port = 5000;
+const port = process.env.port || 5000;
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
